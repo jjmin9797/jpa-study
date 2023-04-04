@@ -17,6 +17,8 @@ public class MemberRepository {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
+            System.out.println("asdasd");
+            em.persist(member);
             tx.commit();
         }catch (Exception e) {
             tx.rollback();

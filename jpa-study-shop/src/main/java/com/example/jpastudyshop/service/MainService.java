@@ -16,6 +16,7 @@ public class MainService {
     private final MemberRepository memberRepository;
 
     public void saveMember(Member member){
+        System.out.println("In Controller");
         memberRepository.save(member);
     }
 }
