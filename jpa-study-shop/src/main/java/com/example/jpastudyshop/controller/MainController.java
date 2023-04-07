@@ -19,4 +19,9 @@ public class MainController {
         mainService.saveMember(member);
         return "OK";
     }
+
+    @GetMapping("/proxy")
+    public String proxyTest() {
+        return mainService.proxyTest();
+    }
 }

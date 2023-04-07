@@ -19,4 +19,8 @@ public class MainService {
         System.out.println("In Controller");
         memberRepository.save(member);
     }
+
+    public String proxyTest() {
+        return memberRepository.proxyTest();
+    }
 }

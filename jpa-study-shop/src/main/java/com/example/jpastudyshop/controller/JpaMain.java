@@ -1,34 +1,17 @@
-package com.example.jpastudyshop.repository;
+package com.example.jpastudyshop.controller;
+
+
 
 import com.example.jpastudyshop.domain.Member;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-@Repository
-public class MemberRepository {
+public class JpaMain {
 
-    public void save(Member member) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jm");
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
-        try {
-            System.out.println("asdasd");
-            em.persist(member);
-            tx.commit();
-        }catch (Exception e) {
-            tx.rollback();
-        }finally {
-            em.close();
-        }
-        emf.close();
-    }
-
-    public String proxyTest() {
+    public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jm");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -41,14 +24,17 @@ public class MemberRepository {
             em.persist(member);
             System.out.println("In Proxy Try Test");
             em.flush();
-            em.clear();
+
 
             Member findMember = em.getReference(Member.class, member.getId());
             System.out.println(findMember.getClass());
             userName = findMember.getName();
+            String city = findMember.getCity();
+            System.out.println(city);
+            System.out.println(userName);
             System.out.println(findMember.getClass());
             tx.commit();
-            return userName;
+
         }catch (Exception e) {
             tx.rollback();
             System.out.println(e.getMessage());
@@ -56,6 +42,5 @@ public class MemberRepository {
             em.close();
         }
         emf.close();
-        return userName;
     }
 }
