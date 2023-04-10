@@ -1,5 +1,6 @@
 package com.example.jpastudyshop.domain;
 
+import com.example.jpastudyshop.domain.valueType.Address;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -25,9 +26,6 @@ public class Member {
 
     private String name;
 
-    private String city;
-
-    private String street;
-
-    private String zipcode;
+    @Enumerated
+    private Address address;
 }
