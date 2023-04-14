@@ -29,7 +29,7 @@ public class JpaMain {
             Member findMember = em.getReference(Member.class, member.getId());
             System.out.println(findMember.getClass());
             userName = findMember.getName();
-            String city = findMember.getCity();
+            String city = findMember.getAddress().getCity();
             System.out.println(city);
             System.out.println(userName);
             System.out.println(findMember.getClass());
