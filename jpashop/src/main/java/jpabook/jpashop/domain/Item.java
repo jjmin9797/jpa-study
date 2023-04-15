@@ -6,25 +6,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter @Setter
-public class Member {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "dtype")
+public abstract class Item {
 
     @Id @GeneratedValue
-    @Column(name = "member_id")
+    @Column(name = "item_id")
     private Long id;
 
-    @Embedded
-    private Address address;
+    @OneToMany(mappedBy = "item")
+    private List<OrderItem> orderItems;
 
     private String name;
-
-    @OneToMany(mappedBy = "member")
-    private List<Order> orders = new ArrayList<>();
-
+    private int price;
+    private int stockQuantity;
 }
