@@ -1,15 +1,13 @@
 package jpabook.jpashop.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class OrderItem {
 
     @Id @GeneratedValue
@@ -26,4 +24,21 @@ public class OrderItem {
 
     private int orderPrice;
     private int count;
+
+    public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
+        item.removeStock(count);
+        return OrderItem.builder()
+                .item(item)
+                .orderPrice(orderPrice)
+                .count(count)
+                .build();
+    }
+
+    public void cancel() {
+        getItem().addStock(count);
+    }
+
+    public int getTotalPrice() {
+        return count * orderPrice;
+    }
 }
