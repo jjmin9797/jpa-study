@@ -23,7 +23,15 @@ public class OrderRepository {
     }
 
 
-
+    public List<Order> searchOrder(OrderSearch orderSearch) {
+        return em.createQuery("select o from Order o join o.member m"+
+                " where o.status = :status" +
+                " and m.name like :memberName",Order.class)
+                .setParameter("status",orderSearch.getOrderStatus())
+                .setParameter("memberName",orderSearch.getMemberName())
+                .setMaxResults(1000)
+                .getResultList();
+    }
 
     public List<Order> findByMemberName(String memberName, OrderStatus type) {
         return em.createQuery("select o " +

@@ -14,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "orders")
-@Builder
 public class Order {
     @Id @GeneratedValue
     @Column(name = "order_id")
@@ -38,7 +37,7 @@ public class Order {
     // ==연관관계 메서드==//
     public void setMember(Member member) {
         this.member = member;
-        member.getOrders().add(this);
+        //member.getOrders().add(this);
     }
 
     public void addOrderItem(OrderItem orderItem) {
